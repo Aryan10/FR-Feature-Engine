@@ -1,6 +1,9 @@
 #include <pokeagb/pokeagb.h>
 #include "../config.h"
 
+#if (INSERT_FAIRY_TYPE == TRUE)
+#include "../../images/type_chart.c"
+	
 pchar type_names[][7] = {
     _("Normal"),
     _("Fight"),
@@ -252,4 +255,4 @@ struct TypeEffectiveness type_effectiveness_new[]=
     { TYPE_FIGHTING,    TYPE_GHOST,         NO_EFFECT },
     END_TYPE_CHART
 };
-
+#endif

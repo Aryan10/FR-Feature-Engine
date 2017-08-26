@@ -27,25 +27,20 @@ export DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
 
 rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
-# Generated
-IMAGES=$(call rwildcard,images,*.png)
-
 # Sources
 C_SRC=$(call rwildcard,$(SRC),*.c)
 S_SRC=$(call rwildcard,$(SRC),*.s)
-GEN_SRC=$(IMAGES:images/%.png=generated/images/%.c)
 
 # Binaries
 C_OBJ=$(C_SRC:%=%.o)
 S_OBJ=$(S_SRC:%=%.o)
-GEN_OBJ=$(GEN_SRC:%=%.o)
-OBJECTS=$(addprefix $(BUILD)/,$(GEN_OBJ) $(C_OBJ) $(S_OBJ))
+OBJECTS=$(addprefix $(BUILD)/,$(C_OBJ) $(S_OBJ))
 
 #-------------------------------------------------------------------------------
 
-.PHONY: all clean test generated images patch
+.PHONY: all clean test generated patch
 
-all: main.s $(BINARY) $(call rwildcard,patches,*.s)
+all: Special_image_Loading main.s $(BINARY) $(call rwildcard,patches,*.s)
 	@echo -e "\e[1;32mCreating ROM\e[0m"
 	$(ARMIPS) main.s -sym output.txt
 
@@ -59,6 +54,10 @@ clean:
 
 test:
 	$(MAKE) -f test/Makefile
+	
+Special_image_Loading:
+	grit images/type_chart.png -gB4 -pe16 -gu8 -pu8 -ftc -o images/type_chart.c
+	
 
 $(BINARY): $(OBJECTS)
 	@echo -e "\e[1;32mLinking ELF binary $@\e[0m"
@@ -76,12 +75,6 @@ $(BUILD)/%.s.o: %.s
 	@echo -e "\e[32mAssembling $<\e[0m"
 	@mkdir -p $(@D)
 	@$(PREPROC) $< $(CHARMAP) | $(AS) $(ASFLAGS) -o $@
-
-generated/images/%.c: images/%.png images/%.grit
-	@echo -e "\e[34mProcessing image $<\e[0m"
-	@mkdir -p $(@D)
-	@grit $< -o $@ -ff$(<:%.png=%.grit)
-	@python scripts/grithack.py $@
 
 $(DEPDIR)/%.d: ;
 .PRECIOUS: $(DEPDIR)/%.d

@@ -23,3 +23,4 @@ CRITICAL_HIT_UPDATE						EQU TRUE
 
 // these all the hacks below are some major hacks
 // you will have to set TRUE or FALSE in the C files as well else they wont work well
+FAIRY_TYPE_ADD							EQU TRUE

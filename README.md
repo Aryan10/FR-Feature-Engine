@@ -8,4 +8,5 @@ https://discord.gg/y8ru3A3
 
 # CREDITS
 Special thanks to all the respective researchers for doing the research and development
-*The credit list will be updated when this project will be in usable state*
+
+*The credit list will be updated soon with proper credits to the person who did the research and development*

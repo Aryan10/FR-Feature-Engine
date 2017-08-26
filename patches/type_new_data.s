@@ -1,3 +1,5 @@
+.if (FAIRY_TYPE_ADD == TRUE)
+
 // type image and pallete
 	// image
 		.org 0x8107DB0
@@ -51,3 +53,4 @@
 		
 		.org 0x801EA84
 		.word type_effectiveness_new
+.endif
