@@ -7,7 +7,8 @@
 
 
 // these are defines to select either to insert a hack or not1
-#define INSERT_FAIRY_TYPE 			TRUE
+#define INSERT_FAIRY_TYPE 					TRUE
+#define EGG_HATCHING_GRAPHICS_UPDATE		TRUE
 
 
 // these are the defines being made for being used by user according to their choice.

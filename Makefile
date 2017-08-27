@@ -57,6 +57,7 @@ test:
 	
 Special_image_Loading:
 	grit images/type_chart.png -gB4 -pe16 -gu8 -pu8 -ftc -o images/type_chart.c
+	grit images/egg_hatching.png -gB4 -pe16 -gu8 -pu8 -ftc -o images/egg_hatching.c
 	
 
 $(BINARY): $(OBJECTS)

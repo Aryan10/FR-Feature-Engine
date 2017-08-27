@@ -1,5 +1,3 @@
-.include "features_select.s"
-
 .if (RUNNING_INDOOR == TRUE)
 	.org 0x080BD494
 	.byte 0x0
